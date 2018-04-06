@@ -1,0 +1,32 @@
+<h1>Chat</h1>
+
+自分のユーザID：<input type="text" id="my_id">
+<input type="submit" onclick="subscribeNotificationChannel()" value="設定">
+<br>
+チャット相手のID<input type="text" id="friend_id">
+<input type="submit" onclick="startChat(friend_id.value,false)" value="会話開始">
+<br>
+
+<div class="chat-container" id="chat-container">
+</div>
+<template id="chat-template">
+  <div class="chatroom-container" id="chatroom-container">
+    <div class="chatroom-header">
+      <div class="chatroom-title" id="chatroom-title"></div>
+      <div class="chatroom-close-button" id="chatroom-close-button">x</div>
+    </div>
+    <div id="chatroom-content">
+      <div class="chatroom-body">
+        <div id="chat-index" class="chat-index">
+          <div class="chatroom-sysmessage">インスタントチャットへようこそ！チャットウィンドウを閉じるとチャット内容は全て消去されます。</div>
+        </div>
+      </div>
+      <div class="chatroom-input">
+        <form id="chat-form" onsubmit="return false;">
+          <input data-behavior="chat_post" type="text" id="chat-input" disabled/>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+

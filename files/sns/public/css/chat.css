@@ -1,0 +1,184 @@
+.chat-container {
+  position: fixed;
+  overflow-x: scroll;
+  display:flex;
+  width:100%;
+  bottom: 0;
+  padding: 4px 4px 0 4px;
+  pointer-events: none;
+  vertical-align: bottom;
+}
+
+.chatroom-container {
+  height: 350px;
+  max-height: 350px;
+  width: 240px;
+  margin: 4px 4px 0 4px;
+  text-align: right;
+  font-size: 14px;
+  background: #fff;
+  float:left;
+  vertical-align: bottom;
+  display:block;  
+  box-shadow: 0 0 8px gray;
+  border-radius:10px 10px 0 0;
+  bottom: 0;
+  pointer-events: auto;
+}
+
+.chatroom-header {
+  width:240px;
+  height:20px;
+  padding: 0 0 0 0px;
+  background: #b39090;
+  color:white;
+  text-align: left;
+  border-radius: 10px 10px 0px 0px;
+  -webkit-border-radius: 10px 10px 0px 0px;
+  -moz-border-radius: 10px 10px 0px 0px;
+  cursor: pointer;
+  bottom: 0;  
+}
+.chatroom-title {
+  width:210px;
+  padding-left:10px;
+  float:left;
+}
+.chatroom-close-button{
+  width:10px;
+  padding-right:10px;
+  text-align:right;
+  float:left;
+}
+
+.chatroom-content {
+  height: 330px;
+  position: absolute;
+}
+.chatroom-body {
+  margin: 0px 0px 0px 0px;
+  width: 240px;
+  position: absolute;
+  bottom: 20;
+}
+
+.chatroom-sysmessage{
+  width:200px;
+  text-align: center;
+  font-size: 10px;
+  color: #888;
+  margin:20px;
+}
+
+.chat-index {
+  height:305px;
+  vertical-align: bottom;
+  overflow-y: scroll;
+  -ms-overflow-style:none;
+}
+.chat-index::-webkit-scrollbar{
+  display:none;
+}
+
+.chatroom-input{
+  height:25px;
+  width:240px;
+  position: absolute;
+  padding: 0 0 4px 0;
+  margin: 0;
+  bottom: 0;
+}
+
+.chatroom-input form{
+  height:18px;
+  width:240px;
+  padding: 0;
+  margin: 0;
+}  
+
+.chatroom-input input{
+  height:18px;
+  width:220px;
+  margin:0 7px 0 7px;
+  padding:0;
+  background-color: #999;
+}
+
+/*相手のコメント*/
+.comment-left {
+  width: 100%;
+  margin: 10px 0;
+  overflow: hidden;
+  text-align: left;    
+}
+
+.comment-left .icon {
+  float: left;
+  margin: 5px 15px 0px 2px;
+  width: 30px;
+  height: 30px;
+  }
+
+.comment-left .icon img{
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.balloon1 {
+  display: inline-block;
+  position: relative; 
+  margin: 0 0 0 0px;
+  padding: 10px;
+  max-width: 170px;
+  border-radius: 12px;
+  background: #bbb;
+}
+
+.balloon1:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 8px; 
+  left: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #bbb;
+  -ms-transform: rotate(15deg);
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+.balloon1 p {
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+}
+
+/*自分のコメント*/
+.balloon2 {
+  display: inline-block;
+  position: relative; 
+  margin: 10px 20px 10px 0;
+  text-align: right;    
+  max-width: 180px;
+  border-radius: 12px;
+  background: #b39090;
+  color:white;
+}
+
+.balloon2 p{
+  margin: 0 10px 0 0;
+  padding: 8px;
+  word-break: break-all;
+}
+
+.balloon2 p:after {
+  content: "";
+  position: absolute;
+  top: 3px; 
+  right: -19px;
+  border: 8px solid transparent;
+  border-left: 18px solid #b39090;
+  -ms-transform: rotate(-35deg);
+  -webkit-transform: rotate(-35deg);
+  transform: rotate(-35deg);
+}

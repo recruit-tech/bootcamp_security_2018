@@ -10,8 +10,8 @@ class IconsController < ApplicationController
       if px = params[:resize_max_pixel]
         # 2018/04/05 harupu Fixed critical vulnerability :-)
         # `convert -resize #{px}x#{px} #{image_path} #{image_path}`
-        px.gsub!(/"/, '')
-        image_path.gsub!(/"/, '')
+        px.gsub!(/"/, '\"')
+        image_path.gsub!(/"/, '\"')
         `convert -resize "#{px}x#{px}" "#{image_path}" "#{image_path}"`
       end
       render json: {file_name: dest_file_name} and return

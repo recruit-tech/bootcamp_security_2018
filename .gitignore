@@ -9,7 +9,7 @@
 /files/sns/test/tmp/
 /files/sns/test/version_tmp/
 /files/sns/tmp/
-
+/files/sns/log/
 
 # Used by dotenv library to load environment variables.
 # .env

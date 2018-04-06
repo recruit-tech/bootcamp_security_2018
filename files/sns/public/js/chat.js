@@ -23,7 +23,7 @@ function startChat(friend_id,received){
   }
 
   chatroom_list[room_id] = App.cable.subscriptions.create(
-    {"channel":"ChatChannel","channel_id":createChannelId2(my_id,friend_id)}, {
+    {"channel":"ChatChannel","channel_id":createChannelId(my_id,friend_id)}, {
     connected: function() {
     },
 
@@ -191,7 +191,7 @@ function subscribeNotificationChannel(id) {
     return;
   }
   notification_channel = App.cable.subscriptions.create(
-    {"channel":"ChatChannel","channel_id":createChannelId2(my_id,0)}, {
+    {"channel":"ChatChannel","channel_id":createChannelId(my_id,0)}, {
     connected: function() {
       // Called when the subscription is ready for use on the server
       console.log("Subscribe notification channel:"+my_id);
@@ -252,10 +252,6 @@ function changeChatInputStatus(room_id, disabled) {
 }
 
 function createChannelId(my_id, friend_id) {
-  return Math.random()+":"+my_id+":"+friend_id;
-}
-
-function createChannelId2(my_id, friend_id) {
   return xorEncode(Math.random()+":"+my_id+":"+friend_id);
 }
 

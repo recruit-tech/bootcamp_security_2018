@@ -120,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         var forms = document.getElementsByClassName("form-search-add-user");
         for (var counter=0; counter<forms.length; ++counter) {
           var value = forms[counter];
-          console.log(value);
           value.onsubmit = function (event) {
             event.preventDefault();
             var login_id = this.login_id;

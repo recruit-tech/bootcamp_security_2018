@@ -21,7 +21,6 @@ class ApplicationController < ActionController::API
   end
 
   def reject_cross_origin_request
-    print "HOGEHOGEHOGE"
     render :nothing => true, :status => :bad_request and return unless request.headers['X-Requested-With']
   end
 

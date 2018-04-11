@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
       }
-    fetcher('/friends/'+$$('input-search-user').value+"?order=name+asc", {method: 'GET'}, process);
+    fetcher('/friends/'+encodeURI($$('input-search-user').value)+"?order=name+asc", {method: 'GET'}, process);
   });
 
   // テキストフィード投稿

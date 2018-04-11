@@ -1,10 +1,4 @@
 #!/bin/bash
-ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
-apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
-mkdir /var/run/mysqld
-chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
-mysql_install_db --datadir=/var/lib/mysql --user=mysql
-systemctl start mysql
 cd /var/www/app/sns/;
 rake db:create RAILS_ENV=production
 rake db:reset RAILS_ENV=production

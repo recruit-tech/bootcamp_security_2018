@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-LABEL maintainer="nishimunea"
+LABEL maintainer="harupur"
 
 RUN apt-get update \
  && echo "mysql-server mysql-server/root_password password toor" | debconf-set-selections \
@@ -16,7 +16,11 @@ RUN apt-get update \
  && gem install bundler \
  && mkdir -p /var/www/app/sns
 
+RUN apt-get install -y language-pack-en
+
 COPY files/sns /var/www/app/sns
+RUN  cd /var/www/app/sns/; bundle install
+
 COPY files/conf/nginx-default /etc/nginx/sites-enabled/default
 COPY files/conf/nginx.conf /etc/nginx/nginx.conf
 COPY files/init.sh /root/init.sh
@@ -25,7 +29,6 @@ COPY files/rc.local /etc/rc.local
 
 RUN chown -R www-data.www-data /var/www/app \
  && chmod -R 775 /var/www/app/ \
- && cd /var/www/app/sns/; bundle install \
  && chmod 755 /root/init.sh \
  && chmod 755 /etc/rc.local \
  && systemctl enable nginx

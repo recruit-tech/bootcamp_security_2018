@@ -8,12 +8,15 @@ function startChat(friend_id,received){
   var room_id = my_id<friend_id?my_id+"-"+friend_id:friend_id+"-"+my_id;
   room_info[room_id]=[];
   room_info[room_id]["friend_id"]=friend_id;
-  if(!document.getElementById("friend_"+friend_id)){return;}
-  var name = document.getElementById("friend_"+friend_id).getElementsByClassName("name")[0].textContent;
-
-  if($("#chatroom-container-"+room_id)[0] == undefined) {
-    createChatWindow(room_id, friend_id, name);
+  if(!document.getElementById("friend_"+friend_id)){
+    //友達一覧にいない場合、読み込み直す
+    $$('div-chat-list').innerHTML="";
+    loadFriendListForChat();
+    //return;
   }
+
+  createChatWindow(room_id, friend_id);
+
   if(received) {
     changeChatInputStatus(room_id, false);    
   }
@@ -44,6 +47,8 @@ function startChat(friend_id,received){
           changeChatInputStatus(room_id, false);
           return;
         }
+        createChatWindow(room_id, friend_id); //ChatWindowがなければ作る
+        changeChatInputStatus(room_id, false);
         console.log("Send pong");
         //接続がうまく言っていない時にオブジェクトがなくなる？要確認。
         chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});        
@@ -81,6 +86,7 @@ function startChat(friend_id,received){
       return false;
     }
   });
+  chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
 }
 
 function createCommentBaloon(room_id,data) {
@@ -122,7 +128,15 @@ function createCommentBaloon(room_id,data) {
   nyuru(room_id);
 }
 
-function createChatWindow(room_id, friend_id, name){
+function createChatWindow(room_id, friend_id){
+  if(document.getElementById("friend_"+friend_id) == undefined) {
+    return;
+  }
+  var name = document.getElementById("friend_"+friend_id).getElementsByClassName("name")[0].textContent;
+  if($("#chatroom-container-"+room_id)[0] != undefined) {
+    return;
+  }
+
   var title = name;  
   // Templateからチャットウィンドウを作成。文字列置換の方が簡単な気が。
   var clone = document.importNode($('#chat-template')[0].content, true);
@@ -188,7 +202,7 @@ function nyuru(room_id) {
 function subscribeNotificationChannel(id) {
   my_id = id;
   if(notification_channel != undefined) {
-    return;
+    notification_channel.unsubscribe();
   }
   notification_channel = App.cable.subscriptions.create(
     {"channel":"ChatChannel","channel_id":createChannelId(my_id,0)}, {
@@ -211,11 +225,13 @@ function subscribeNotificationChannel(id) {
         chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
         return;
       }
-      console.log("Resume chat by friend's start chat.");
-      startChat(friend_id,true);
       if(chatroom_list[room_id] != undefined) {
+        console.log("Resume chat by friend's start chat.");
         chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
+      }else{
+        console.log("Requested new chat.");
       }
+      startChat(friend_id,true);  
     },
 
     post: function(message) {

@@ -2,6 +2,7 @@
 
 var latestFeedId = 0;
 var oldestFeedId = 0;
+var loadFriendListForChat = null;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
       $$('div-old-feeds').style.display = 'none';
       loadInitialFeeds();
       loadFriendList();
+      loadFriendListForChat = loadFriendList;
       document.body.removeChild($$('mask'));
       //Notification channelの購読
       subscribeNotificationChannel(localStorage.getItem('id'));

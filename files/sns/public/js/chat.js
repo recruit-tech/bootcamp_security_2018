@@ -86,7 +86,9 @@ function startChat(friend_id,received){
       return false;
     }
   });
-  chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
+  if(received) {
+    chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
+  }
 }
 
 function createCommentBaloon(room_id,data) {
@@ -175,7 +177,7 @@ function connectionTimer(room_id, message){
     printSystemMessage(room_id, message)
     disconnectChat(room_id);
     nyuru(room_id);
-  },3000);
+  },10000);
 }
 
 function printSystemMessage(room_id, message){

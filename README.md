@@ -5,7 +5,7 @@ This is a significant vulnerable SNS web application made with Ruby on Rails.
 The product is meant for educational purposes only.
 DO NOT use any portion of the code for production.
 
-このWebアプリは、脆弱性を多く含むRuby on Railsで作られたSNS風のアプリケーションです。
+このWebアプリは、脆弱性を多く含むRuby on Railsで作られたSNS風のアプリケーションです。
 
 教育用の用途でのみ利用してください。製品の一部としてのコードの流用は厳禁です。
 

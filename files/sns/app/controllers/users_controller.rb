@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   def create
+    # 2018/04/05 harupu Fixed Path traversal vulnerability
+    icon_file_name = params[:icon_file_name]
+    icon_file_name.gsub!(/\.\.\//, '')
     stat = User.create params.permit(:login_id, :name, :pass, :icon_file_name)
     render json: {errors: stat.errors.full_messages}, status: :bad_request and return if stat.errors.any?
 
     user = User.find_by 'login_id = ?', params[:login_id]
     icon_file_path = "#{Rails.root}/public/icons/#{user[:icon_file_name]}"
-    # 2018/04/05 harupu Fixed Path traversal vulnerability
-    icon_file_path.gsub!(/\.\.\//, '')
     user.update icon_file_name: default_icon_path unless File.file? icon_file_path
 
     token = log_in user

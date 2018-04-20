@@ -51,5 +51,5 @@ build-iPhoneSimulator/
 .rvmrc
 
 .DS_Store
-files/sns/log/production.log
-files/sns/db/production.sqlite3
+files/sns/log/
+files/sns/db/
